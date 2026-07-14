@@ -34,7 +34,9 @@ void infixToPostfix(string s) {
         }
 
         else {
-            while (!st.empty() && prec(s[i]) <= prec(st.top())) {
+            while (!st.empty() &&
+                  (prec(c) < prec(st.top()) ||
+                  (prec(c) == prec(st.top()) && c != '^'))) {
                 result += st.top();
                 st.pop();
             }
@@ -51,7 +53,7 @@ void infixToPostfix(string s) {
 }
 
 int main() {
-    string exp = "(p+q)*(m-n)";
+    string exp = "A^B^C";
     cout << "Infix expression: " << exp << endl;
     infixToPostfix(exp);
     return 0;
